@@ -13,7 +13,15 @@ class SurveysController {
 
 		await surveysRepository.save(survey)
 
-		response.status(201).json(survey)
+		return response.status(201).json(survey)
+	}
+
+	async index(request: Request, response: Response) {
+		const surveysRepository = getCustomRepository(SurveysRepository)
+
+		const allSurveys = await surveysRepository.find()
+
+		return response.json(allSurveys)
 	}
 }
 

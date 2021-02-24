@@ -11,5 +11,6 @@ const surveyController = new SurveysController()
 routes.post('/users', userController.create)
 
 routes.post('/surveys', surveyController.create)
+routes.get('/surveys', surveyController.index)
 
 export { routes }
