@@ -3,6 +3,10 @@
 		"migrationsDir": "./src/database/migrations"
 	},
 	"database": "./src/database/database.sqlite",
+	"entities": [
+		"./src/models/**.ts"
+	],
+	"logging": true,
 	"migrations": [
 		"./src/database/migrations/**.ts"
 	],
