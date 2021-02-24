@@ -1,4 +1,5 @@
 import request from 'supertest'
+
 import { app } from '../app'
 import createConnection from '../database'
 
@@ -11,7 +12,7 @@ describe('Users', () => {
 
 	it('should be able to create a new user', async () => {
 		const response = await request(app).post('/users').send({
-			name: 'Test Jest', email: 'test@test.com'
+			name: 'Test Name', email: 'test@test.com'
 		})
 
 		expect(response.status).toBe(201)
