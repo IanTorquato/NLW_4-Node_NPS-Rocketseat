@@ -6,7 +6,7 @@
 	"entities": [
 		"./src/models/**.ts"
 	],
-	"logging": true,
+	"logging": false,
 	"migrations": [
 		"./src/database/migrations/**.ts"
 	],
