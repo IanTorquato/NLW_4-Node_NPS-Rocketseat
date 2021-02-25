@@ -8,7 +8,7 @@ export default {
 	// automock: false,
 
 	// Stop running tests after `n` failures
-	bail: true,
+	// bail: true,
 
 	// The directory where Jest should store its cached dependency information
 	// cacheDirectory: "C:\\Users\\ianto\\AppData\\Local\\Temp\\jest",
@@ -60,7 +60,7 @@ export default {
 	// globalTeardown: undefined,
 
 	// A set of global variables that need to be available in all test environments
-	// globals: {},
+	globals: { "NODE_ENV": "test" },
 
 	// The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
 	// maxWorkers: "50%",
@@ -131,7 +131,7 @@ export default {
 	// setupFilesAfterEnv: [],
 
 	// The number of seconds after which a test is considered as slow and reported as such in the results.
-	// slowTestThreshold: 5,
+	slowTestThreshold: 10,
 
 	// A list of paths to snapshot serializer modules Jest should use for snapshot testing
 	// snapshotSerializers: [],
