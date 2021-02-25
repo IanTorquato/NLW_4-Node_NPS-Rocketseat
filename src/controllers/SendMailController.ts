@@ -29,7 +29,8 @@ class SendMailController {
 		}
 
 		const surveyUserAlreadyExists = await surveysUsersRepository.findOne({
-			where: [{ user_id: user.id }, { value: null }]
+			where: [{ user_id: user.id }, { value: null }],
+			relations: ['user', 'survey']
 		})
 
 		const link = process.env.URL_MAIL

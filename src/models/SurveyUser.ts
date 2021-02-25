@@ -1,5 +1,8 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuid } from 'uuid'
+
+import { User } from './User'
+import { Surveys } from './Surveys'
 
 @Entity('surveys_users')
 class SurveyUser {
@@ -9,8 +12,16 @@ class SurveyUser {
 	@Column()
 	user_id: string
 
+	@ManyToOne(() => User)
+	@JoinColumn({ name: "user_id" })
+	user: User
+
 	@Column()
 	survey_id: string
+
+	@ManyToOne(() => Surveys)
+	@JoinColumn({ name: "survey_id" })
+	survey: Surveys
 
 	@Column()
 	value: string
