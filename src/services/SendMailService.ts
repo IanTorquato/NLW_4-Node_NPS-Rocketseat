@@ -7,7 +7,7 @@ interface VariablesMailOptions {
 	title: string
 	description: string
 	link: string
-	user_id: string
+	id: string
 }
 
 interface MailOptions {

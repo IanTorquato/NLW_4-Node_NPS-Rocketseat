@@ -29,26 +29,29 @@ class SendMailController {
 		}
 
 		const surveyUserAlreadyExists = await surveysUsersRepository.findOne({
-			where: [{ user_id: user.id }, { value: null }],
+			where: { user_id: user.id, value: null },
 			relations: ['user', 'survey']
 		})
 
 		const link = process.env.URL_MAIL
 		const variables = {
-			name: user.name, title: survey.title, description: survey.description, link, user_id: user.id
+			name: user.name, title: survey.title, description: survey.description, link, id: ''
 		}
 		const path = resolve(__dirname, '..', 'view', 'emails', 'npsMail.hbs')
 		const emailOptions = { to: email, subject: survey.title, variables, path }
 
-		await SendMailService.execute(emailOptions)
-
 		if (surveyUserAlreadyExists) {
+			variables.id = surveyUserAlreadyExists.id
+
+			await SendMailService.execute(emailOptions)
 			return response.json(surveyUserAlreadyExists)
 		}
 
 		const surveyUser = surveysUsersRepository.create({ user_id: user.id, survey_id })
 		await surveysUsersRepository.save(surveyUser)
 
+		variables.id = surveyUser.id
+		await SendMailService.execute(emailOptions)
 		return response.status(201).json(surveyUser)
 	}
 }
