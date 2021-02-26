@@ -29,8 +29,7 @@
   "scripts": {
     "dev": "tsnd --transpile-only --ignore-watch node_modules src/server.ts",
     "tporm": "tsnd node_modules/typeorm/cli.js",
-    "test": "jest --detectOpenHandles",
-    "posttest": "rimraf ./src/database/database.test.sqlite"
+    "test": "jest -i"
   },
   "version": "1.0.0"
 }
