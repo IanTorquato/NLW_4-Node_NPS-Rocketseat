@@ -7,28 +7,28 @@ import { AppError } from '../errors/AppError'
 
 // https://localhost:333/answers/:value?u=d0cd2dec-8c76-44c0-8c1c-9bfdd5f3592d
 class AnswerController {
-	async execute(request: Request, response: Response) {
-		const { value } = request.params
-		const { u } = request.query
+  async execute(request: Request, response: Response) {
+    const { value } = request.params
+    const { u } = request.query
 
-		console.log(value, u)
+    console.log(value, u)
 
-		const surveysUsersRepository = getCustomRepository(SurveysUsersRepository)
+    const surveysUsersRepository = getCustomRepository(SurveysUsersRepository)
 
-		const surveyUser = await surveysUsersRepository.findOne({ id: String(u) })
+    const surveyUser = await surveysUsersRepository.findOne({ id: String(u) })
 
-		console.log(surveyUser)
+    console.log(surveyUser)
 
-		if (!surveyUser) {
-			throw new AppError('Survey User does not exists', 404)
-		}
+    if (!surveyUser) {
+      throw new AppError('Survey User does not exists', 404)
+    }
 
-		surveyUser.value = Number(value)
+    surveyUser.value = Number(value)
 
-		await surveysUsersRepository.save(surveyUser)
+    await surveysUsersRepository.save(surveyUser)
 
-		return response.json(surveyUser)
-	}
+    return response.json(surveyUser)
+  }
 }
 
 export { AnswerController }

@@ -5,25 +5,25 @@ import { SurveysRepository } from '../repositories/SurveysRepository'
 
 
 class SurveysController {
-	async create(request: Request, response: Response) {
-		const { title, description } = request.body
+  async create(request: Request, response: Response) {
+    const { title, description } = request.body
 
-		const surveysRepository = getCustomRepository(SurveysRepository)
+    const surveysRepository = getCustomRepository(SurveysRepository)
 
-		const survey = surveysRepository.create({ title, description })
+    const survey = surveysRepository.create({ title, description })
 
-		await surveysRepository.save(survey)
+    await surveysRepository.save(survey)
 
-		return response.status(201).json(survey)
-	}
+    return response.status(201).json(survey)
+  }
 
-	async index(request: Request, response: Response) {
-		const surveysRepository = getCustomRepository(SurveysRepository)
+  async index(request: Request, response: Response) {
+    const surveysRepository = getCustomRepository(SurveysRepository)
 
-		const allSurveys = await surveysRepository.find()
+    const allSurveys = await surveysRepository.find()
 
-		return response.json(allSurveys)
-	}
+    return response.json(allSurveys)
+  }
 }
 
 export { SurveysController }

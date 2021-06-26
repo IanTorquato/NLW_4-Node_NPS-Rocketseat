@@ -5,35 +5,35 @@ import { app } from '../app'
 import createConnection from '../database'
 
 describe('Surveys', () => {
-	beforeAll(async () => {
-		const connection = await createConnection()
+  beforeAll(async () => {
+    const connection = await createConnection()
 
-		await connection.runMigrations()
-	})
+    await connection.runMigrations()
+  })
 
-	afterAll(async () => {
-		const connection = getConnection()
+  afterAll(async () => {
+    const connection = getConnection()
 
-		await connection.dropDatabase()
-		await connection.close()
-	})
+    await connection.dropDatabase()
+    await connection.close()
+  })
 
-	it('should be able to create a new survey', async () => {
-		const response = await request(app).post('/surveys').send({
-			title: 'Test Title', description: 'Test description'
-		})
+  it('should be able to create a new survey', async () => {
+    const response = await request(app).post('/surveys').send({
+      title: 'Test Title', description: 'Test description'
+    })
 
-		expect(response.status).toBe(201)
-		expect(response.body).toHaveProperty('id')
-	})
+    expect(response.status).toBe(201)
+    expect(response.body).toHaveProperty('id')
+  })
 
-	it('should be able to list all (two) surveys', async () => {
-		await request(app).post('/surveys').send({
-			title: 'Test Title2', description: 'Test description2'
-		})
+  it('should be able to list all (two) surveys', async () => {
+    await request(app).post('/surveys').send({
+      title: 'Test Title2', description: 'Test description2'
+    })
 
-		const response = await request(app).get('/surveys')
+    const response = await request(app).get('/surveys')
 
-		expect(response.body.length).toBe(2)
-	})
+    expect(response.body.length).toBe(2)
+  })
 })
